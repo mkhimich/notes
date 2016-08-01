@@ -1,4 +1,4 @@
-package hello;
+package hello.localUsage;
 
 /**
  * Created by mkhimich on 8/1/16.
