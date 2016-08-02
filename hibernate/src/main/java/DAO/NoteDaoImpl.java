@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by mkhimich on 8/2/16.
  */
-public class NoteDaoImpl implements NoteDao {
+public class NoteDaoImpl extends JpaDao<Note> implements GeneralDao<Note> {
 
     List<Note> notes;
 
@@ -27,33 +27,39 @@ public class NoteDaoImpl implements NoteDao {
         notes.add(noteTwo);
     }
 
+//    @Override
+//    public List<Note> getAllNotes() {
+//        return notes;
+//    }
+//
+//    @Override
+//    public Note getNote(int id) {
+//        return notes.get(id);
+//    }
+//
+//    @Override
+//    public void updateNote(Note note) {
+//        int noteIndex = notes.indexOf(note);
+//        notes.get(noteIndex).setNoteName(note.getNoteName());
+//        notes.get(noteIndex).setNoteFull(note.getNoteFull());
+//        System.out.println("Note with id = " + note.getId() + " was successfully updated" );
+//    }
+//
+//    @Override
+//    public void deleteNote(Note note) {
+//        notes.remove(note);
+//        System.out.println("Note with id = " + note.getId() + " was successfully removed" );
+//    }
+//
+//    @Override
+//    public void deleteNote(int id) {
+//        notes.remove(id);
+//        System.out.println("Note with id = " + id + " was successfully removed" );
+//    }
+
+
     @Override
-    public List<Note> getAllNotes() {
+    public List<Note> findAll() {
         return notes;
-    }
-
-    @Override
-    public Note getNote(int id) {
-        return notes.get(id);
-    }
-
-    @Override
-    public void updateNote(Note note) {
-        int noteIndex = notes.indexOf(note);
-        notes.get(noteIndex).setNoteName(note.getNoteName());
-        notes.get(noteIndex).setNoteFull(note.getNoteFull());
-        System.out.println("Note with id = " + note.getId() + " was successfully updated" );
-    }
-
-    @Override
-    public void deleteNote(Note note) {
-        notes.remove(note);
-        System.out.println("Note with id = " + note.getId() + " was successfully removed" );
-    }
-
-    @Override
-    public void deleteNote(int id) {
-        notes.remove(id);
-        System.out.println("Note with id = " + id + " was successfully removed" );
     }
 }
