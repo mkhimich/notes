@@ -1,7 +1,19 @@
 group 'notes'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1"
+    }
+}
+
 apply plugin: 'java'
+apply plugin: "org.liquibase.gradle"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -12,10 +24,14 @@ repositories {
 
 jar {
     baseName = 'gs-accessing-data-jpa'
-    version =  '0.1.0'
+    version = '0.1.0'
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.0.0'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'com.h2database:h2'
+
 }
+

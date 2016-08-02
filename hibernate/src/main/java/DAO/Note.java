@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "NOTES")
-public class Notes {
+public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +43,11 @@ public class Notes {
 
     public String getNoteFull() {
         return noteFull;
+    }
+
+    //For testing purposes only
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setUsername(String username) {
