@@ -5,6 +5,8 @@ buildscript {
     repositories {
         maven {
             url "https://plugins.gradle.org/m2/"
+            maven { url "http://repo.spring.io/snapshot" }
+            maven { url "http://repo.spring.io/milestone" }
         }
     }
     dependencies {
@@ -23,16 +25,23 @@ repositories {
 }
 
 jar {
-    baseName = 'gs-accessing-data-jpa'
+    baseName = 'hibernate'
     version = '0.1.0'
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.0.0'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'com.h2database:h2'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.192'
     compile 'org.springframework:spring-context:4.3.2.RELEASE'
-
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.1.Final'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.3.4'
+    compile group: 'org.springframework', name: 'spring-test', version: '4.3.2.RELEASE'
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.springframework.boot', name: 'spring-boot-autoconfigure', version: '1.4.0.RELEASE'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.2.RELEASE'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
 }
 

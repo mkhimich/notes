@@ -36,6 +36,5 @@ dependencies {
     compile 'org.springframework:spring-context:4.3.2.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'org.springframework.boot:spring-boot-devtools'
-
     testCompile("junit:junit")
 }
