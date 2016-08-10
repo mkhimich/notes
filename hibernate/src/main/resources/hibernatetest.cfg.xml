@@ -9,7 +9,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
-        <property name="connection.url">jdbc:hsqldb:hsql:mnotes</property>
+        <property name="connection.url">jdbc:hsqldb:hsql:notes_test</property>
         <property name="connection.username">root</property>
         <property name="connection.password"></property>
 
@@ -21,7 +21,7 @@
         <property name="connection.pool_size">1</property>
 
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>

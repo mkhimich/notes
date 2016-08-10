@@ -1,13 +1,11 @@
 package DAO;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by mkhimich on 8/1/16.
@@ -17,58 +15,65 @@ public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private int id;
+    @Column(name = "id", nullable = false)
+    private long id;
 
     @Column(name = "user_id", nullable = false)
-    private int user_id;
+    private long user_id;
     //Note name, can be empty
     @Column(name = "note")
     private String noteName;
 
-    //Full note, can be empty (if noteName is populated)
-    @Column(name = "NOTE_FULL")
-    private String noteFull;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "add_date", nullable = false)
+    private Date created;
 
-    public Note(int username, String noteName, String noteFull) {
-        this.user_id = username;
+    @PrePersist
+    private void onCreate() {
+        created = new Date();
+    }
+
+//    //Full note, can be empty (if noteName is populated)
+//    @Column(name = "note_full")
+//    private String noteFull;
+
+    public Note(long user_id, String noteName) {
+        this.user_id = user_id;
         this.noteName = noteName;
-        this.noteFull = noteFull;
     }
 
     public Note() {
 
     }
 
-    public Note(int id, int user_id, String noteName, String noteFull) {
+    public Note(long id, long user_id, String noteName) {
         this.id = id;
         this.user_id = user_id;
         this.noteName = noteName;
-        this.noteFull = noteFull;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public int getUsername() {
+    public long getUserId() {
         return user_id;
+    }
+
+    public Date getCreated() {
+        return created;
     }
 
     public String getNoteName() {
         return noteName;
     }
 
-    public String getNoteFull() {
-        return noteFull;
-    }
-
     //For testing purposes only
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public void setUsername(int user_id) {
+    public void setUsername(long user_id) {
         this.user_id = user_id;
     }
 
@@ -76,8 +81,24 @@ public class Note {
         this.noteName = noteName;
     }
 
-    public void setNoteFull(String noteFull) {
-        this.noteFull = noteFull;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Note note = (Note) o;
+
+        if (user_id != note.user_id) return false;
+        if (noteName != null ? !noteName.equals(note.noteName) : note.noteName != null) return false;
+        return created != null ? created.equals(note.created) : note.created == null;
+
     }
 
+    @Override
+    public int hashCode() {
+        int result = (int) (user_id ^ (user_id >>> 32));
+        result = 31 * result + (noteName != null ? noteName.hashCode() : 0);
+        result = 31 * result + (created != null ? created.hashCode() : 0);
+        return result;
+    }
 }
