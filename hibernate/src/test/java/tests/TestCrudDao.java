@@ -15,8 +15,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by mkhimich on 8/4/16.
@@ -25,14 +24,8 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = "classpath:test-config.xml")
 public class TestCrudDao {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Inject
     NoteDaoImpl getNoteImpl;
-
-    @Inject
-    ApplicationContext context = new ClassPathXmlApplicationContext("test-config.xml");
 
     private NoteDaoImpl noteImpl;
 
@@ -40,10 +33,6 @@ public class TestCrudDao {
     public void testSetup() {
         createDeleteDB();
     }
-
-//    public static void main(String[] args) {
-//        createDeleteDB();
-//    }
 
     private void createDeleteDB() {
         Note note = new Note(1, "Note 1");
@@ -71,16 +60,39 @@ public class TestCrudDao {
     }
 
     @Test
-    public void testCreate(){
+    public void testCreateDeleteNote(){
         Note note = new Note(1, "Note Created");
         getNoteImpl.persist(note);
         assertTrue("note is null", note.getId()> 0);
         Note found = getNoteImpl.findById(note.getId());
         assertEquals(note.getNoteName(), found.getNoteName());
         assertEquals(note.getUserId(), found.getUserId());
-        System.out.println(note.getCreated());
-        System.out.println(found.getCreated());
         assertEquals(note, found);
+        long id = found.getId();
+        getNoteImpl.deleteById(id);
+        assertNull(getNoteImpl.findById(id));
     }
+
+    @Test
+    public void testUpdateNote(){
+        long defaultID = 4L;
+        String updatedNote = "Updated Note";
+        Note note = getNoteImpl.findById(defaultID);
+        assertNotEquals(note.getNoteName(), updatedNote);
+        note.setNoteName("Updated Note");
+        getNoteImpl.update(note);
+        Note found = getNoteImpl.findById(defaultID);
+        assertEquals(found.getNoteName(), updatedNote);
+    }
+
+    @Test
+    public void testListAndIncrementation(){
+        int size = getNoteImpl.findAll().size();
+        Note note = new Note(1, "New Note");
+        getNoteImpl.persist(note);
+        assertNotNull(getNoteImpl.findById((long) size));
+        assertEquals(size + 1 , getNoteImpl.findAll().size());
+    }
+
 
 }

@@ -19,7 +19,8 @@ public class SimpleApp {
 
         Note note = new Note();
         note.setUsername(1);
-        note.setNoteName("Note 2");
+        note.setNoteName("Note 1");
+        note.setCreated(System.currentTimeMillis());
         //note.setNoteFull("Note Full");
         noteImpl.persist(note);
         System.out.println("Note : " + note + " added successfully");

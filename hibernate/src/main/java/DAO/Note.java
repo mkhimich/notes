@@ -24,13 +24,12 @@ public class Note {
     @Column(name = "note")
     private String noteName;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "add_date", nullable = false)
-    private Date created;
+    private long created;
 
     @PrePersist
     private void onCreate() {
-        created = new Date();
+        created = System.currentTimeMillis();
     }
 
 //    //Full note, can be empty (if noteName is populated)
@@ -60,7 +59,7 @@ public class Note {
         return user_id;
     }
 
-    public Date getCreated() {
+    public long getCreated() {
         return created;
     }
 
@@ -88,17 +87,21 @@ public class Note {
 
         Note note = (Note) o;
 
+        if (id != note.id) return false;
         if (user_id != note.user_id) return false;
-        if (noteName != null ? !noteName.equals(note.noteName) : note.noteName != null) return false;
-        return created != null ? created.equals(note.created) : note.created == null;
+        return noteName != null ? noteName.equals(note.noteName) : note.noteName == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (user_id ^ (user_id >>> 32));
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (int) (user_id ^ (user_id >>> 32));
         result = 31 * result + (noteName != null ? noteName.hashCode() : 0);
-        result = 31 * result + (created != null ? created.hashCode() : 0);
         return result;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
     }
 }

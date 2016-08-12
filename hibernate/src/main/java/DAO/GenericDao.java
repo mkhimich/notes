@@ -49,6 +49,10 @@ public abstract class GenericDao<E> implements DaoInterface<E> {
         entityManager.remove(entity);
     }
 
+    public void deleteById(long id){
+        entityManager.remove(findById(id));
+    }
+
     public E findById(Long id) {
         return entityManager.find(entityClass, id);
     }
