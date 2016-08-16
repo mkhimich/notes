@@ -18,7 +18,7 @@ public class SimpleApp {
 //        NoteDaoImpl noteImpl = (NoteDaoImpl) context.getBean("noteImpl");
 //
 //        Note note = new Note();
-//        note.setUsername(1);
+//        note.setUserId(1);
 //        note.setNoteName("Note 1");
 //        note.setCreated(System.currentTimeMillis());
 //        //note.setNoteFull("Note Full");

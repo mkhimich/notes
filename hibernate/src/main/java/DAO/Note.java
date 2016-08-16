@@ -2,16 +2,11 @@ package DAO;
 
 import javax.persistence.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.Timestamp;
-import java.util.Date;
-
 /**
  * Created by mkhimich on 8/1/16.
  */
 @Entity(name = "notes")
-public class Note {
+public class Note implements IModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +14,7 @@ public class Note {
     private long id;
 
     @Column(name = "user_id", nullable = false)
-    private long user_id;
+    private long userId;
     //Note name, can be empty
     @Column(name = "note")
     private String noteName;
@@ -36,8 +31,8 @@ public class Note {
 //    @Column(name = "note_full")
 //    private String noteFull;
 
-    public Note(long user_id, String noteName) {
-        this.user_id = user_id;
+    public Note(long userId, String noteName) {
+        this.userId = userId;
         this.noteName = noteName;
     }
 
@@ -45,18 +40,19 @@ public class Note {
 
     }
 
-    public Note(long id, long user_id, String noteName) {
+    public Note(long id, long userId, String noteName) {
         this.id = id;
-        this.user_id = user_id;
+        this.userId = userId;
         this.noteName = noteName;
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
     public long getUserId() {
-        return user_id;
+        return userId;
     }
 
     public long getCreated() {
@@ -72,8 +68,8 @@ public class Note {
         this.id = id;
     }
 
-    public void setUsername(long user_id) {
-        this.user_id = user_id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public void setNoteName(String noteName) {
@@ -88,7 +84,7 @@ public class Note {
         Note note = (Note) o;
 
         if (id != note.id) return false;
-        if (user_id != note.user_id) return false;
+        if (userId != note.userId) return false;
         return noteName != null ? noteName.equals(note.noteName) : note.noteName == null;
 
     }
@@ -96,7 +92,7 @@ public class Note {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (user_id ^ (user_id >>> 32));
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
         result = 31 * result + (noteName != null ? noteName.hashCode() : 0);
         return result;
     }

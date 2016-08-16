@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Transactional
 @Component
-public abstract class GenericDao<E> implements DaoInterface<E> {
+public abstract class GenericDao<E extends IModel> implements DaoInterface<E> {
 
     protected Class<E> entityClass;
 

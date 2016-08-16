@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by mkhimich on 8/16/16.
  */
 @Entity(name = "users")
-public class User {
+public class User implements IModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,6 +23,15 @@ public class User {
 
     @Column(name = "reg_date", nullable = false)
     private long created;
+
+    public User(String nickname, String email, String password){
+        this.nickname = nickname;
+        this.email = email;
+        this.password = password;
+    }
+    public User(){
+
+    }
 
     @PrePersist
     private void onCreate() {
@@ -61,8 +70,33 @@ public class User {
         this.nickname = nickname;
     }
 
+    @Override
     public long getId() {
         return id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (created != user.created) return false;
+        if (nickname != null ? !nickname.equals(user.nickname) : user.nickname != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return password != null ? password.equals(user.password) : user.password == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (int) (created ^ (created >>> 32));
+        return result;
+    }
 }
