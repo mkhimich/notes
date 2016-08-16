@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Named;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.util.List;
@@ -26,12 +27,8 @@ public class NoteDaoImpl extends GenericDao<Note> implements NoteDao {
         return noteDao;
     }
 
-    public void setNoteDao(NoteDao noteDao) {
-        this.noteDao = noteDao;
+    @Override
+    public List<Note> findUserNotes(long id) {
+        return entityManager.createQuery("select t from " + entityClass.getAnnotation(Entity.class).name() + " t WHERE user_id = " + id).getResultList();
     }
-
-    public void addNote(Note note){
-        getNoteDao().persist(note);
-    }
-
 }

@@ -37,49 +37,6 @@ public class NotesTests extends BaseCrudTest<Note> {
 
     }
 
-//    @Test
-//    public void testTableSize() {
-//        assertEquals("Not all 5 notes saved ", noteImpl.findAll().size(), 5);
-//    }
-//
-//    @Test
-//    public void testCreateDeleteNote(){
-//        Note note = new Note(1, "Note Created");
-//        noteImpl.persist(note);
-//        assertTrue("note is null", note.getId()> 0);
-//        Note found = noteImpl.findById(note.getId());
-//        assertEquals(note.getNoteName(), found.getNoteName());
-//        assertEquals(note.getUserId(), found.getUserId());
-//        assertEquals(note, found);
-//        long id = found.getId();
-//        noteImpl.deleteById(id);
-//        assertNull(noteImpl.findById(id));
-//    }
-//
-//
-//
-//    @Test
-//    public void testUpdateNote(){
-//        long defaultID = 4L;
-//        String updatedNote = "Updated Note";
-//        Note note = noteImpl.findById(defaultID);
-//        assertNotEquals(note.getNoteName(), updatedNote);
-//        note.setNoteName("Updated Note");
-//        noteImpl.update(note);
-//        Note found = noteImpl.findById(defaultID);
-//        assertEquals(found.getNoteName(), updatedNote);
-//    }
-//
-//    @Test
-//    public void testListAndIncrementation(){
-//        int size = noteImpl.findAll().size();
-//        Note note = new Note(1, "New Note");
-//        noteImpl.persist(note);
-//        assertNotNull(noteImpl.findById((long) size));
-//        assertEquals(size + 1 , noteImpl.findAll().size());
-//    }
-
-
     @Override
     protected DaoInterface<Note> getDao() {
         return noteDao;

@@ -20,30 +20,6 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(locations = "classpath:test-config.xml")
 public abstract class BaseCrudTest<T extends IModel> {
 
-//    @Before
-//    public void generateData(){
-//        Note note = new Note(1, "Note 1");
-//        Note note2 = new Note(1, "Note 2");
-//        Note note3 = new Note(1, "Note 3");
-//        Note note4 = new Note(1, "Note 4");
-//        Note note5 = new Note(1, "Note 5");
-//        noteImpl.persist(note);
-//        noteImpl.persist(note2);
-//        noteImpl.persist(note3);
-//        noteImpl.persist(note4);
-//        noteImpl.persist(note5);
-//        User user = new User("user1", "user1@gmail.com", "user1password");
-//        User user2 = new User("user2", "user2@gmail.com", "user2password");
-//        User user3 = new User("user3", "user3@gmail.com", "user3password");
-//        User user4 = new User("user4", "user4@gmail.com", "user4password");
-//        User user5 = new User("user5", "user5@gmail.com", "user5password");
-//        userDaoImpl.persist(user);
-//        userDaoImpl.persist(user2);
-//        userDaoImpl.persist(user3);
-//        userDaoImpl.persist(user4);
-//        userDaoImpl.persist(user5);
-//    }
-
     protected abstract DaoInterface<T> getDao();
 
     protected abstract T getNewPopulatedModel();
