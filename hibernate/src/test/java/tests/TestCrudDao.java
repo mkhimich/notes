@@ -46,7 +46,6 @@ public class TestCrudDao {
         getNoteImpl.persist(note4);
         getNoteImpl.persist(note5);
 
-
     }
 
     @After

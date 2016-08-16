@@ -14,18 +14,31 @@ import java.util.List;
 public class SimpleApp {
     public static void main(String[] args) {
 
+//        ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+//        NoteDaoImpl noteImpl = (NoteDaoImpl) context.getBean("noteImpl");
+//
+//        Note note = new Note();
+//        note.setUsername(1);
+//        note.setNoteName("Note 1");
+//        note.setCreated(System.currentTimeMillis());
+//        //note.setNoteFull("Note Full");
+//        noteImpl.persist(note);
+//        System.out.println("Note : " + note + " added successfully");
+//
+//        List<Note> notes = noteImpl.findAll();
+//        System.out.println("The list of all persons = " + notes.size());
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
-        NoteDaoImpl noteImpl = (NoteDaoImpl) context.getBean("noteImpl");
+        UserDaoImpl userImpl = (UserDaoImpl) context.getBean("userImpl");
 
-        Note note = new Note();
-        note.setUsername(1);
-        note.setNoteName("Note 1");
-        note.setCreated(System.currentTimeMillis());
-        //note.setNoteFull("Note Full");
-        noteImpl.persist(note);
-        System.out.println("Note : " + note + " added successfully");
+        User user = new User();
+        user.setNickname("DenisK");
+        user.setEmail("denisk@gmail.com");
+        user.setPassword("ololo");
+        userImpl.persist(user);
+        System.out.println("User : " + user + " added successfully");
 
-        List<Note> notes = noteImpl.findAll();
-        System.out.println("The list of all persons = " + notes.size());
+        List<User> users = userImpl.findAll();
+        System.out.println("The list of all persons = " + users.size());
+
     }
 }

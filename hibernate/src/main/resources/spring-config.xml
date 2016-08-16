@@ -25,6 +25,7 @@
     <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
 
     <bean id="noteImpl" class="DAO.NoteDaoImpl" />
+    <bean id="userImpl" class="DAO.UserDaoImpl" />
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
