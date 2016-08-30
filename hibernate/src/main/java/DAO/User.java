@@ -1,6 +1,7 @@
 package DAO;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Created by mkhimich on 8/16/16.
@@ -30,7 +31,6 @@ public class User implements IModel{
         this.password = password;
     }
     public User(){
-
     }
 
     @PrePersist
@@ -99,4 +99,5 @@ public class User implements IModel{
         result = 31 * result + (int) (created ^ (created >>> 32));
         return result;
     }
+
 }

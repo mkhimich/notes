@@ -64,6 +64,7 @@ dependencies {
     compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.1.2.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.1.2.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-core', version: '4.1.2.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.1.2.RELEASE'
 
 }
 

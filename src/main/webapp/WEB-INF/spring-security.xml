@@ -6,24 +6,22 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-4.1.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/**" access="ROLE_USER" />
+    <http auto-config="true" use-expressions="true">
+        <intercept-url pattern="/login" access="isAnonymous()" />
+        <intercept-url pattern="/register" access="isAnonymous()" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <access-denied-handler error-page="/403" />
         <form-login
                 login-page="/login"
-                default-target-url="/welcome"
+                default-target-url="/notes"
                 authentication-failure-url="/login?error"
                 username-parameter="username"
                 password-parameter="password" />
         <logout logout-success-url="/login?logout" />
     </http>
-
+    <beans:bean id="jdbcUserService" class="notes.JdbcUserService"/>
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="mkhimich" password="123456" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider ref="jdbcUserService"/>
     </authentication-manager>
 
 </beans:beans>
