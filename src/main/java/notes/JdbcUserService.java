@@ -39,7 +39,7 @@ public class JdbcUserService implements AuthenticationProvider{
         if (!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
-        return new UsernamePasswordAuthenticationToken(username,password, new ArrayList<>());
+        return new UsernamePasswordAuthenticationToken(username, password, new ArrayList<>());
     }
 
     @Override

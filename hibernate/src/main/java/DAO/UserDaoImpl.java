@@ -18,7 +18,15 @@ public class UserDaoImpl extends GenericDao<User> implements UserDao {
     private UserDao userDao;
 
     public User findByUserName(String nickname){
-        return (User) entityManager.createQuery("select t from " + entityClass.getAnnotation(Entity.class).name() + " t WHERE nickname = " + nickname).getSingleResult();
+        System.out.println("select t from " + entityClass.getAnnotation(Entity.class).name() + " t WHERE nickname = " + nickname);
+        User user = null;
+        try {
+            user = (User) entityManager.createQuery("select t from " + entityClass.getAnnotation(Entity.class).name() + " t WHERE t.nickname = :entered").setMaxResults(1).
+                    setParameter("entered", nickname).getSingleResult();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return user;
     }
 
 }
